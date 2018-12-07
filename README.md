@@ -5,6 +5,7 @@ This is a java project which is developed using Angular for the front end and Sp
 Prerequisited to run the project
 
 1. Java 8
+
 2.Install either spring tool suites IDE or install spring tools suite plugin for Eclipse or any other suitable IDE
 
 Once the above requirement is met, you can download this repository and import it using 
