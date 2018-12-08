@@ -41,3 +41,19 @@ After parsing the csv data it will display the result in table
 To parse the xml files, navigate to "http://localhost:8080/backend-xml"
 Click on browse button to select the csv file and submit it.
 After parsing the xml data it will display the result in table
+
+
+Test cases:
+
+The Junit test cases are located in
+src/test/java/assignment/MainActivityTest.java
+
+Prerequisites:
+
+To run test cases you should have junit plugin installed in the IDE you are using
+
+To run the test:
+
+Right click on the MainActivityTest.java -> select "Run as" -> "Junit Test" 
+
+The results will be displayed in the IDE itself

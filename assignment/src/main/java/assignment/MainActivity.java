@@ -24,6 +24,7 @@ public class MainActivity {
 	MainActivity() {
 	}
 
+	// this handles the csv records
 	@GetMapping(path="/backend-csv/upload")
 	public Response upload(@RequestParam("limit") String limit) {
 		HashMap<String, Record> map = new HashMap<>();
@@ -62,6 +63,7 @@ public class MainActivity {
 		return new Response("Done", response);
 	}
 	
+	// this handles the xml records
 	@GetMapping(path="/backend-xml/upload")
 	public Response validateXml(@RequestParam("limit") String limit) {
 		String xmlRecords = limit;
@@ -91,6 +93,7 @@ public class MainActivity {
 	        		float mutation = Float.parseFloat(element.getElementsByTagName("mutation").item(0).getTextContent());
 	        		float endBalance = Float.parseFloat(element.getElementsByTagName("endBalance").item(0).getTextContent());
 	        		
+	        		// if any of the required doesnt exists then its invalid data
 	        		if (reference == null || reference.equalsIgnoreCase("") || accountNumber == null ||
 	        				accountNumber.equalsIgnoreCase("") || description == null || description.equals("")) {
 	        			System.out.println("Invalid data");
@@ -98,7 +101,8 @@ public class MainActivity {
 	        		}
 	        		
 	        		Record record = new Record(reference, accountNumber, description, startBalance, mutation, endBalance);
-	        		System.out.println(record);
+
+	        		// check for duplicate transaction
 	        		if (map.containsKey(reference)) {
 	        			map.get(reference).setInvalid("Duplicate transaction");
 	        			record.setInvalid("Duplicate transaction");
@@ -108,7 +112,8 @@ public class MainActivity {
 	        		} else {
 	        			map.put(reference, record);
 	        		}
-	        		response.add(record);
+
+	        		// check for invalid balance
 	        		if (endBalance < 0.0) {
 	        			record.setInvalid("Invalid balance");
 	        			response.add(record);
@@ -119,7 +124,7 @@ public class MainActivity {
 	        
 	    }
 	    catch (Exception e) {
-	    	System.out.println("exception happened");
+	    	System.out.println("exception happened" + e.getMessage());
 	        return new Response("Fail", response);
 	    }
 		
